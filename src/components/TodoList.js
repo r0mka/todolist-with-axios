@@ -47,9 +47,9 @@ export default function TodoList() {
     if (nodeNames.includes(e.target.nodeName)) return true;
   };
 
-  React.useEffect(() => {
-    fetchAndUpdateList();
-  }, []);
+  // React.useEffect(() => {
+  //   fetchAndUpdateList();
+  // }, []);
 
   return (
     <div className="TodoList">
