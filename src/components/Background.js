@@ -7,7 +7,6 @@ const optionsToName = {
   simple: 'Simple',
   bubbles: 'Bubbles',
   snow: 'Snow',
-  nightSky: 'Night Sky',
 };
 
 export default function Background() {
@@ -91,7 +90,7 @@ export default function Background() {
         <div className="particle-size slider-container">
           <input
             type="range"
-            min="3"
+            min="1"
             max="30"
             step="1"
             value={particleSize}

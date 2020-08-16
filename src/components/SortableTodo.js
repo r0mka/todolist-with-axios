@@ -2,15 +2,10 @@ import React, { useState } from 'react';
 import { SortableElement } from 'react-sortable-hoc';
 
 import './Todo.css';
-import {
-  FaTrash,
-  FaPencilAlt,
-  FaArrowCircleDown,
-  FaArrowCircleUp,
-} from 'react-icons/fa';
+import { FaTrash, FaPencilAlt } from 'react-icons/fa';
 
 const SortableTodo = SortableElement(
-  ({ id, title, done, position, update, destroy, toggleDone, move }) => {
+  ({ id, title, done, update, destroy, toggleDone }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [inputValue, setInputValue] = useState(title);
     const [checked, setChecked] = useState(done);
@@ -62,20 +57,6 @@ const SortableTodo = SortableElement(
           </button>
           <button onClick={() => destroy(id)}>
             <FaTrash />
-          </button>
-          <button
-            disabled={position.index <= 0}
-            className={`${position.index <= 0 && 'disabled'}`}
-            onClick={() => move(id, 'up')}
-          >
-            <FaArrowCircleUp />
-          </button>
-          <button
-            disabled={position.index >= position.last}
-            className={`${position.index >= position.last && 'disabled'}`}
-            onClick={() => move(id, 'down')}
-          >
-            <FaArrowCircleDown />
           </button>
         </div>
       </li>

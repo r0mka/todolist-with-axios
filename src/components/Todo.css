@@ -6,7 +6,7 @@
   justify-content: space-between;
   align-items: center;
   background: rgb(45, 62, 79);
-  overflow: hidden;
+  overflow-x: scroll;
   position: relative;
   transition: opacity 500ms ease-in-out;
 }

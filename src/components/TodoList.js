@@ -37,7 +37,6 @@ export default function TodoList({ url }) {
     update,
     destroy,
     toggleDone,
-    move,
     onSortEnd,
     fetchAndUpdateList,
   } = useTodos(initialList);
@@ -60,7 +59,6 @@ export default function TodoList({ url }) {
         update={update}
         destroy={destroy}
         toggleDone={toggleDone}
-        move={move}
         onSortEnd={onSortEnd}
         shouldCancelStart={shouldCancelStart}
         helperClass="text-color-during-drag"
