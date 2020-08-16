@@ -39,11 +39,14 @@ export default function TodoList() {
     axios
       .get(url)
       .then((response) => {
-        const newList = response.data.map(({ _id, name, done }) => ({
-          id: _id,
-          title: name,
-          done,
-        }));
+        const newList = response.data.map(
+          ({ _id, name, done, description }) => ({
+            id: _id,
+            title: name,
+            done,
+            description,
+          })
+        );
         setList(newList);
       })
       .catch((error) => console.log(error));
@@ -62,10 +65,17 @@ export default function TodoList() {
   };
 
   const update = (id, newTitle) => {
-    const updatedList = list.map((todo) =>
-      todo.id === id ? { ...todo, title: newTitle } : todo
-    );
-    setList(updatedList);
+    const currentDoneStatus = list.find((todo) => todo.id === id).done;
+    axios
+      .patch(`${url}/${id}`, {
+        name: newTitle,
+        done: currentDoneStatus,
+      })
+      .then((response) => {
+        console.log(response.data);
+        fetchAndUpdateList();
+      })
+      .catch((error) => console.log(error));
   };
 
   const destroy = (id) => {
@@ -101,7 +111,7 @@ export default function TodoList() {
   };
 
   React.useEffect(() => {
-    console.log('IN USE EFFECT');
+    console.count('IN USE EFFECT');
     fetchAndUpdateList();
   }, []);
 
