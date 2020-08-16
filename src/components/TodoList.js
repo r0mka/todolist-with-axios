@@ -30,7 +30,7 @@ const SortableList = SortableContainer(
   }
 );
 
-export default function TodoList() {
+export default function TodoList({ url }) {
   const {
     list,
     create,
@@ -47,9 +47,9 @@ export default function TodoList() {
     if (nodeNames.includes(e.target.nodeName)) return true;
   };
 
-  // React.useEffect(() => {
-  //   fetchAndUpdateList();
-  // }, []);
+  React.useEffect(() => {
+    fetchAndUpdateList();
+  }, [fetchAndUpdateList]);
 
   return (
     <div className="TodoList">

@@ -6,8 +6,9 @@ export const useTodos = (initialTodos) => {
   const [list, setList] = useState([]);
 
   const fetchAndUpdateList = () => {
+    const url = 'https://sleepy-taiga-81385.herokuapp.com/todo';
     axios
-      .get('https://sleepy-taiga-81385.herokuapp.com/todo')
+      .get(url)
       .then((response) => {
         const newList = response.data.map(({ _id, name, done }) => ({
           id: _id,
