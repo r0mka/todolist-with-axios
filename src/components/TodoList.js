@@ -5,6 +5,7 @@ import axios from 'axios';
 import TodoCreateForm from './TodoCreateForm';
 import { SortableContainer } from 'react-sortable-hoc';
 import SortableTodo from './SortableTodo';
+import Spinner from './Spinner';
 
 const SortableList = SortableContainer(
   ({ list, update, destroy, toggleDone, move }) => {
@@ -32,11 +33,12 @@ const SortableList = SortableContainer(
 
 export default function TodoList() {
   const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const url = 'https://sleepy-taiga-81385.herokuapp.com/todo';
 
   const fetchAndUpdateList = () => {
-    axios
+    return axios
       .get(url)
       .then((response) => {
         const newList = response.data.map(
@@ -48,6 +50,7 @@ export default function TodoList() {
           })
         );
         setList(newList);
+        return Promise.resolve();
       })
       .catch((error) => console.log(error));
   };
@@ -112,22 +115,25 @@ export default function TodoList() {
 
   React.useEffect(() => {
     console.count('IN USE EFFECT');
-    fetchAndUpdateList();
+    fetchAndUpdateList().then((res) => setLoading(false));
   }, []);
 
   return (
     <div className="TodoList">
       <h1>TodoList</h1>
       <TodoCreateForm create={create} />
-      <SortableList
-        list={list}
-        update={update}
-        destroy={destroy}
-        toggleDone={toggleDone}
-        onSortEnd={onSortEnd}
-        shouldCancelStart={shouldCancelStart}
-        helperClass="text-color-during-drag"
-      />
+      {loading && <Spinner />}
+      {!loading && (
+        <SortableList
+          list={list}
+          update={update}
+          destroy={destroy}
+          toggleDone={toggleDone}
+          onSortEnd={onSortEnd}
+          shouldCancelStart={shouldCancelStart}
+          helperClass="text-color-during-drag"
+        />
+      )}
     </div>
   );
 }

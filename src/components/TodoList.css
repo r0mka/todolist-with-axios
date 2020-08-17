@@ -5,6 +5,7 @@
   background: rgb(53, 73, 93);
   color: #fff;
   overflow: hidden;
+  text-align: center;
 }
 .TodoList ul {
   margin-top: 2.6rem;
